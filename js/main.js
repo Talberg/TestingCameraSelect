@@ -114,39 +114,40 @@ function initCameraUI() {
     takeSnapshot();
   });
   makeMusicButton.addEventListener('click', function () {
+    
     takeSnapshotUI();
     takeSnapshot();
   });
 
   // -- fullscreen part
 
-  function fullScreenChange() {
-    if (screenfull.isFullscreen) {
-      toggleFullScreenButton.setAttribute('aria-pressed', true);
-    } else {
-      toggleFullScreenButton.setAttribute('aria-pressed', false);
-    }
-  }
+  // function fullScreenChange() {
+  //   if (screenfull.isFullscreen) {
+  //     toggleFullScreenButton.setAttribute('aria-pressed', true);
+  //   } else {
+  //     toggleFullScreenButton.setAttribute('aria-pressed', false);
+  //   }
+  // }
 
-  if (screenfull.isEnabled) {
-    screenfull.on('change', fullScreenChange);
+  // if (screenfull.isEnabled) {
+  //   screenfull.on('change', fullScreenChange);
 
-    toggleFullScreenButton.style.display = 'block';
+  //   toggleFullScreenButton.style.display = 'block';
 
-    // set init values
-    fullScreenChange();
+  //   // set init values
+  //   fullScreenChange();
 
-    toggleFullScreenButton.addEventListener('click', function () {
-      screenfull.toggle(document.getElementById('container')).then(function () {
-        console.log(
-          'Fullscreen mode: ' +
-            (screenfull.isFullscreen ? 'enabled' : 'disabled'),
-        );
-      });
-    });
-  } else {
-    console.log("iOS doesn't support fullscreen (yet)");
-  }
+  //   toggleFullScreenButton.addEventListener('click', function () {
+  //     screenfull.toggle(document.getElementById('container')).then(function () {
+  //       console.log(
+  //         'Fullscreen mode: ' +
+  //           (screenfull.isFullscreen ? 'enabled' : 'disabled'),
+  //       );
+  //     });
+  //   });
+  // } else {
+  //   console.log("iOS doesn't support fullscreen (yet)");
+  // }
 
   // -- switch camera part
   if (amountOfCameras > 1) {

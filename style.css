@@ -58,7 +58,7 @@ button {
 }
 
 #takePhotoButton {
-  left: calc(25% - 40px);
+  left: calc(50% - 40px);
   top: calc(50% - 40px);
   width: 80px;
   height: 80px;
@@ -71,9 +71,9 @@ button {
   top: calc(50% - 40px);
   width: 80px;
   height: 80px;
-  background-image: url('img/ic_photo_camera_white_48px.svg');
+  background-image: url('img/61-617737_when-thinking-gets-out-of-control-ai-brain.png');
   border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: white;
 }
 
 #takePhotoButton:active {
@@ -124,6 +124,10 @@ button {
   }
 
   #switchCameraButton {
+    left: calc(75% - 32px);
+    top: calc(50% - 32px);
+  }
+  #makeMusicButton {
     left: calc(20% - 32px);
     top: calc(50% - 32px);
   }
