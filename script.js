@@ -34,7 +34,7 @@ let array = devices.map(device=>{
   console.log(videoDevices)
   console.log(devices)
   const options = videoDevices.map(videoDevice => {
-    return `<option value="${videoDevice.groupId}">${videoDevice.label}</option>`;
+    return `<option value="${videoDevice.deviceId}">${videoDevice.label}</option>`;
   });
   cameraOptions.innerHTML = options.join('');
 };
@@ -47,9 +47,10 @@ play.onclick = () => {
     return;
   }
   if ('mediaDevices' in navigator && navigator.mediaDevices.getUserMedia) {
+      console.log(cameraOptions)
     const updatedConstraints = {
       ...constraints,
-      groupId: {
+      Id: {
         exact: cameraOptions.value
       }
     };
@@ -72,9 +73,10 @@ const handleStream = (stream) => {
 
 
 cameraOptions.onchange = () => {
+    console.log(cameraOptions)
     const updatedConstraints = {
       ...constraints,
-      groupId: {
+      deviceId: {
         exact: cameraOptions.value
       }
     };
