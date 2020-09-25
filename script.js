@@ -30,7 +30,7 @@ const getCameraSelection = async () => {
 let array = devices.map(device=>{
     console.log(device.kind)
 })
-  const videoDevices = devices;
+  const videoDevices = devices.filter(device=> device ==='videoinput')
   console.log(videoDevices)
   console.log(devices)
   const options = videoDevices.map(videoDevice => {
@@ -73,7 +73,7 @@ const handleStream = (stream) => {
 
 
 cameraOptions.onchange = () => {
-    console.log(cameraOptions)
+    console.log(cameraOptions.value)
     const updatedConstraints = {
       ...constraints,
       deviceId: {
