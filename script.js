@@ -30,11 +30,11 @@ const getCameraSelection = async () => {
 let array = devices.map(device=>{
     console.log(device.kind)
 })
-  const videoDevices = devices.filter(device=> device ==='videoinput')
+  const videoDevices = devices.filter(device=> device.kind ==='videoinput')
   console.log(videoDevices)
   console.log(devices)
   const options = videoDevices.map(videoDevice => {
-    return `<option value="${videoDevice.deviceId}">${videoDevice.label}</option>`;
+    return `<option value="${videoDevice.deviceId}">${videoDevice.label}1</option>`;
   });
   cameraOptions.innerHTML = options.join('');
 };
@@ -47,7 +47,7 @@ play.onclick = () => {
     return;
   }
   if ('mediaDevices' in navigator && navigator.mediaDevices.getUserMedia) {
-      console.log(cameraOptions)
+      console.log(cameraOptions.value)
     const updatedConstraints = {
       ...constraints,
       Id: {
