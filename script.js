@@ -34,7 +34,7 @@ let array = devices.map(device=>{
   console.log(videoDevices)
   console.log(devices)
   const options = videoDevices.map(videoDevice => {
-    return `<option value="${videoDevice.deviceId}">${videoDevice.label}</option>`;
+    return `<option value="${videoDevice.groupId}">${videoDevice.label}</option>`;
   });
   cameraOptions.innerHTML = options.join('');
 };
@@ -74,7 +74,7 @@ const handleStream = (stream) => {
 cameraOptions.onchange = () => {
     const updatedConstraints = {
       ...constraints,
-      deviceId: {
+      groupId: {
         exact: cameraOptions.value
       }
     };
