@@ -58,7 +58,16 @@ button {
 }
 
 #takePhotoButton {
-  left: calc(50% - 40px);
+  left: calc(25% - 40px);
+  top: calc(50% - 40px);
+  width: 80px;
+  height: 80px;
+  background-image: url('img/ic_photo_camera_white_48px.svg');
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+#makeMusicButton {
+  left: calc(75% - 40px);
   top: calc(50% - 40px);
   width: 80px;
   height: 80px;

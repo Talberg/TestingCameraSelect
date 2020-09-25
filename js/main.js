@@ -7,6 +7,7 @@
 */
 
 var takeSnapshotUI = createClickFeedbackUI();
+let model, webcam, labelContainer, maxPredictions,currentPrediction,makeMusicButton
 
 var video;
 var takePhotoButton;
@@ -14,6 +15,12 @@ var toggleFullScreenButton;
 var switchCameraButton;
 var amountOfCameras = 0;
 var currentFacingMode = 'environment';
+const URL = "https://teachablemachine.withgoogle.com/models/juTjqqPvw/";
+const modelURL = URL + "model.json";
+const metadataURL = URL + "metadata.json";
+
+
+
 
 // this function counts the amount of video inputs
 // it replaces DetectRTC that was previously implemented.
@@ -44,8 +51,11 @@ function deviceCount() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', function (event) {
+document.addEventListener('DOMContentLoaded', async function (event) {
   // check if mediaDevices is supported
+  model = await tmImage.load(modelURL, metadataURL);
+  maxPredictions = model.getTotalClasses();
+  console.log(model)
   if (
     navigator.mediaDevices &&
     navigator.mediaDevices.getUserMedia &&
@@ -68,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
           amountOfCameras = deviceCount;
 
           // init the UI and the camera stream
+          //put the init for the 
           initCameraUI();
           initCameraStream();
         });
@@ -93,11 +104,16 @@ function initCameraUI() {
   takePhotoButton = document.getElementById('takePhotoButton');
   toggleFullScreenButton = document.getElementById('toggleFullScreenButton');
   switchCameraButton = document.getElementById('switchCameraButton');
+  makeMusicButton = document.getElementById('makeMusicButton')
 
   // https://developer.mozilla.org/nl/docs/Web/HTML/Element/button
   // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_button_role
 
   takePhotoButton.addEventListener('click', function () {
+    takeSnapshotUI();
+    takeSnapshot();
+  });
+  makeMusicButton.addEventListener('click', function () {
     takeSnapshotUI();
     takeSnapshot();
   });
@@ -209,6 +225,7 @@ function initCameraStream() {
   function handleSuccess(stream) {
     window.stream = stream; // make stream available to browser console
     video.srcObject = stream;
+    video.canvas = {height:200,width:200}
 
     if (constraints.video.facingMode) {
       if (constraints.video.facingMode === 'environment') {
@@ -221,6 +238,8 @@ function initCameraStream() {
     const track = window.stream.getVideoTracks()[0];
     const settings = track.getSettings();
     str = JSON.stringify(settings, null, 4);
+    console.log('put the prediction here so that the video feed can be passed  ')
+    console.log(video.captureStream())
     console.log('settings ' + str);
   }
 
@@ -241,6 +260,27 @@ function takeSnapshot() {
 
   context = canvas.getContext('2d');
   context.drawImage(video, 0, 0, width, height);
+  console.log('predict the era here with the snapshot then put the music on ')
+  predict()
+  
+  
+  async function predict() {
+        // predict can take in an image, video or canvas html element
+        console.log(canvas)
+        const prediction = await model.predict(canvas);
+        // for (let i = 0; i < maxPredictions; i++) {
+            
+        //     const classPrediction =
+        //         prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+        //     labelContainer.childNodes[i].innerHTML = classPrediction;
+        // }
+      let flatPrediction=JSON.stringify(prediction)
+       localStorage.setItem("prediction", flatPrediction);
+      
+        console.log(prediction)
+    }
+  
+  
 
   // polyfil if needed https://github.com/blueimp/JavaScript-Canvas-to-Blob
 
