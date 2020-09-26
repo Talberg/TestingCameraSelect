@@ -15,7 +15,7 @@ var toggleFullScreenButton;
 var switchCameraButton;
 var amountOfCameras = 0;
 var currentFacingMode = 'environment';
-const URL = "https://teachablemachine.withgoogle.com/models/juTjqqPvw/";
+const URL = "https://teachablemachine.withgoogle.com/models/4H6pLbA3x/";
 const modelURL = URL + "model.json";
 const metadataURL = URL + "metadata.json";
 let text = document.getElementById('classification')
