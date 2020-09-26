@@ -3,6 +3,9 @@ body {
   padding: 0px;
   background: #000;
 }
+p{
+  color: white;
+}
 
 #vid_container {
   position: fixed;

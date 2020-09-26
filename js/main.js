@@ -18,6 +18,7 @@ var currentFacingMode = 'environment';
 const URL = "https://teachablemachine.withgoogle.com/models/juTjqqPvw/";
 const modelURL = URL + "model.json";
 const metadataURL = URL + "metadata.json";
+let text = document.getElementById('classification')
 
 
 
@@ -276,6 +277,24 @@ function takeSnapshot() {
         //     labelContainer.childNodes[i].innerHTML = classPrediction;
         // }
       let flatPrediction=JSON.stringify(prediction)
+      let era 
+      let topPrediction=0
+      prediction.map(data=>{
+        console.log(data.probability)
+        if(data.probability>topPrediction){
+
+          era = data.className
+          topPrediction = data.probability
+        }
+      })
+
+      console.log(era)
+      console.log(topPrediction)
+      console.log(text)
+      text.innerHTML= era
+
+      //append a thing to a thing here 
+      
        localStorage.setItem("prediction", flatPrediction);
       
         console.log(prediction)
